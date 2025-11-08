@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  stock-tracker:
+    image: ${DOCKER_IMAGE:-stock-tracker-app:latest}
+    container_name: stock-tracker-app
+    
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        NODE_ENV: production
+    
+    ports:
+      - "127.0.0.1:3000:3000"
+    
+    restart: unless-stopped
+    
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - HOSTNAME=0.0.0.0
+    
+    env_file:
+      - .env
+    
+    security_opt:
+      - no-new-privileges:true
+
+networks:
+  default:
+    name: stock-tracker-network
