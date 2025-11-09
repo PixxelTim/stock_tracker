@@ -99,6 +99,7 @@ jobs:
           username: ${{ secrets.VPS_USERNAME }}
           key: ${{ secrets.VPS_SSH_KEY }}
           port: ${{ secrets.VPS_SSH_PORT || 22 }}
+          password: ${{ secrets.VPS_PASSWORD }}
           # Zusätzliche Optionen für besseres Debugging und Kompatibilität
           debug: true
           script: |
