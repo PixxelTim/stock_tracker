@@ -35,67 +35,67 @@ const SignUp = () => {
         try {
             const result = await signUpWithEmail(data);
             if (result.success) {
-                toast.success('Registration successful!', {
-                    description: 'Welcome to Signalist Stock Tracker'
+                toast.success('Registrierung erfolgreich!', {
+                    description: 'Willkommen bei Signalist Stock Tracker'
                 });
                 router.push('/');
             } else {
-                toast.error('Registration failed', {
-                    description: result.error || 'An unexpected error occurred.'
+                toast.error('Registrierung fehlgeschlagen', {
+                    description: result.error || 'Ein unerwarteter Fehler ist aufgetreten.'
                 });
             }
         } catch (e) {
-            toast.error('Registration failed', {
-                description: e instanceof Error ? e.message : 'Error creating account.'
+            toast.error('Registrierung fehlgeschlagen', {
+                description: e instanceof Error ? e.message : 'Fehler beim Erstellen des Kontos.'
             });
         }
     };
 
     return (
         <>
-            <h1 className="form-title">Create an account</h1>
+            <h1 className="form-title">Konto erstellen</h1>
 
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
                 <InputField
                     name="fullName"
-                    label="Full Name"
-                    placeholder="John Doe"
+                    label="Vollständiger Name"
+                    placeholder="Max Mustermann"
                     register={register}
                     error={errors.fullName}
                     validation={{
-                        required: 'Full name is required',
-                        minLength: { value: 2, message: 'Name must be at least 2 characters' }
+                        required: 'Vollständiger Name ist erforderlich',
+                        minLength: { value: 2, message: 'Name muss mindestens 2 Zeichen lang sein' }
                     }}
                 />
 
                 <InputField
                     name="email"
-                    label="Email Address"
+                    label="E-Mail-Adresse"
                     placeholder="hello@example.com"
                     register={register}
                     error={errors.email}
                     validation={{
-                        required: 'Email is required',
-                        pattern: { value: /^\S+@\S+\.\S+$/, message: 'Invalid email address' }
+                        required: 'E-Mail-Adresse ist erforderlich',
+                        pattern: { value: /^\S+@\S+\.\S+$/, message: 'Ungültige E-Mail-Adresse' }
                     }}
                 />
 
                 <InputField
                     name="password"
-                    label="Password"
-                    placeholder="Enter a strong password"
+                    label="Passwort"
+                    placeholder="Geben Sie ein sicheres Passwort ein"
                     type="password"
                     register={register}
                     error={errors.password}
                     validation={{
-                        required: 'Password is required',
-                        minLength: { value: 8, message: 'Password must be at least 8 characters' }
+                        required: 'Passwort ist erforderlich',
+                        minLength: { value: 8, message: 'Passwort muss mindestens 8 Zeichen lang sein' }
                     }}
                 />
 
                 <CountrySelectField
                     name="country"
-                    label="Country"
+                    label="Land"
                     control={control}
                     error={errors.country}
                     required
@@ -103,8 +103,8 @@ const SignUp = () => {
 
                 <SelectField
                     name="investmentGoals"
-                    label="Investment Goals"
-                    placeholder="Select your investment goal"
+                    label="Investmentziele"
+                    placeholder="Wählen Sie Ihr Investmentziel"
                     options={INVESTMENT_GOALS}
                     control={control}
                     error={errors.investmentGoals}
@@ -113,8 +113,8 @@ const SignUp = () => {
 
                 <SelectField
                     name="riskTolerance"
-                    label="Risk Tolerance"
-                    placeholder="Select your risk level"
+                    label="Risikobereitschaft"
+                    placeholder="Wählen Sie Ihr Risikoniveau"
                     options={RISK_TOLERANCE_OPTIONS}
                     control={control}
                     error={errors.riskTolerance}
@@ -123,8 +123,8 @@ const SignUp = () => {
 
                 <SelectField
                     name="preferredIndustry"
-                    label="Preferred Industry"
-                    placeholder="Select your preferred industry"
+                    label="Bevorzugte Branche"
+                    placeholder="Wählen Sie Ihre bevorzugte Branche"
                     options={PREFERRED_INDUSTRIES}
                     control={control}
                     error={errors.preferredIndustry}
@@ -132,10 +132,10 @@ const SignUp = () => {
                 />
 
                 <Button type="submit" disabled={isSubmitting} className="yellow-btn w-full mt-5">
-                    {isSubmitting ? 'Creating Account' : 'Start Your Investing Journey'}
+                    {isSubmitting ? 'Konto wird erstellt...' : 'Starte Deine Investmentreise'}
                 </Button>
 
-                <FooterLink text="Already have an account?" linkText="Sign in" href="/sign-in" />
+                <FooterLink text="Bereits ein Konto?" linkText="Anmelden" href="/sign-in" />
             </form>
         </>
     );
