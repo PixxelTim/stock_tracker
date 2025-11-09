@@ -69,6 +69,15 @@ jobs:
           platforms: linux/amd64
           build-args: |
             NODE_ENV=production
+            MONGODB_URI=${{ secrets.MONGODB_URI }}
+            BETTER_AUTH_SECRET=${{ secrets.BETTER_AUTH_SECRET }}
+            BETTER_AUTH_URL=${{ secrets.BETTER_AUTH_URL }}
+            GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }}
+            NODEMAILER_EMAIL=${{ secrets.NODEMAILER_EMAIL }}
+            NODEMAILER_PASSWORD=${{ secrets.NODEMAILER_PASSWORD }}
+            NEXT_PUBLIC_FINNHUB_API_KEY=${{ secrets.NEXT_PUBLIC_FINNHUB_API_KEY }}
+            FINNHUB_BASE_URL=${{ secrets.FINNHUB_BASE_URL }}
+            NEXT_PUBLIC_BASE_URL=${{ secrets.NEXT_PUBLIC_BASE_URL }}
 
 
   deploy:
