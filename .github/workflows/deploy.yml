@@ -67,18 +67,6 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
           platforms: linux/amd64
-          build-args: |
-            NODE_ENV=production
-            MONGODB_URI=${{ secrets.MONGODB_URI }}
-            BETTER_AUTH_SECRET=${{ secrets.BETTER_AUTH_SECRET }}
-            BETTER_AUTH_URL=${{ secrets.BETTER_AUTH_URL }}
-            GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }}
-            NODEMAILER_EMAIL=${{ secrets.NODEMAILER_EMAIL }}
-            NODEMAILER_PASSWORD=${{ secrets.NODEMAILER_PASSWORD }}
-            NEXT_PUBLIC_FINNHUB_API_KEY=${{ secrets.NEXT_PUBLIC_FINNHUB_API_KEY }}
-            FINNHUB_BASE_URL=${{ secrets.FINNHUB_BASE_URL }}
-            NEXT_PUBLIC_BASE_URL=${{ secrets.NEXT_PUBLIC_BASE_URL }}
-
 
   deploy:
     name: Deploy to VPS
@@ -87,6 +75,9 @@ jobs:
     if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
     
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
       - name: Convert repository name to lowercase
         id: lowercase
         run: |
@@ -99,24 +90,104 @@ jobs:
           username: ${{ secrets.VPS_USERNAME }}
           key: ${{ secrets.VPS_SSH_KEY }}
           port: ${{ secrets.VPS_SSH_PORT || 22 }}
-          password: ${{ secrets.VPS_PASSWORD }}
-          # Zusätzliche Optionen für besseres Debugging und Kompatibilität
-          debug: true
+          timeout: 60s
+          command_timeout: 30m
           script: |
             set -e
             
-            cd ${{ secrets.VPS_APP_DIR || '/opt/stock-tracker' }}
+            echo "🚀 Starting automated deployment..."
             
-            export DOCKER_IMAGE=${{ env.REGISTRY }}/${{ steps.lowercase.outputs.image_name }}:latest
+            # Set variables
+            APP_DIR="${{ secrets.VPS_APP_DIR }}"
+            if [ -z "$APP_DIR" ]; then
+              APP_DIR="/opt/stock-tracker"
+            fi
             
+            DOCKER_IMAGE="${{ env.REGISTRY }}/${{ steps.lowercase.outputs.image_name }}:latest"
+            
+            # Create app directory if it doesn't exist
+            echo "📁 Creating app directory..."
+            mkdir -p "$APP_DIR"
+            cd "$APP_DIR"
+            
+            # Create docker-compose.yml from inline content
+            echo "📝 Creating docker-compose.yml..."
+            cat > docker-compose.yml << 'EOF'
+            version: '3.8'
+            
+            services:
+              app:
+                image: ${DOCKER_IMAGE}
+                container_name: stock-tracker-app
+                restart: unless-stopped
+                ports:
+                  - "3000:3000"
+                environment:
+                  NODE_ENV: production
+                  MONGODB_URI: ${MONGODB_URI}
+                  BETTER_AUTH_SECRET: ${BETTER_AUTH_SECRET}
+                  BETTER_AUTH_URL: ${BETTER_AUTH_URL}
+                  GEMINI_API_KEY: ${GEMINI_API_KEY}
+                  NODEMAILER_EMAIL: ${NODEMAILER_EMAIL}
+                  NODEMAILER_PASSWORD: ${NODEMAILER_PASSWORD}
+                  NEXT_PUBLIC_FINNHUB_API_KEY: ${NEXT_PUBLIC_FINNHUB_API_KEY}
+                  FINNHUB_BASE_URL: ${FINNHUB_BASE_URL}
+                  NEXT_PUBLIC_BASE_URL: ${NEXT_PUBLIC_BASE_URL}
+                networks:
+                  - stock-tracker-network
+                logging:
+                  driver: "json-file"
+                  options:
+                    max-size: "10m"
+                    max-file: "3"
+            
+            networks:
+              stock-tracker-network:
+                driver: bridge
+            EOF
+            
+            # Create .env file with secrets
+            echo "🔐 Creating .env file..."
+            cat > .env << 'EOF'
+            DOCKER_IMAGE=${{ env.REGISTRY }}/${{ steps.lowercase.outputs.image_name }}:latest
+            MONGODB_URI=${{ secrets.MONGODB_URI }}
+            BETTER_AUTH_SECRET=${{ secrets.BETTER_AUTH_SECRET }}
+            BETTER_AUTH_URL=${{ secrets.BETTER_AUTH_URL }}
+            GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }}
+            NODEMAILER_EMAIL=${{ secrets.NODEMAILER_EMAIL }}
+            NODEMAILER_PASSWORD=${{ secrets.NODEMAILER_PASSWORD }}
+            NEXT_PUBLIC_FINNHUB_API_KEY=${{ secrets.NEXT_PUBLIC_FINNHUB_API_KEY }}
+            FINNHUB_BASE_URL=${{ secrets.FINNHUB_BASE_URL }}
+            NEXT_PUBLIC_BASE_URL=${{ secrets.NEXT_PUBLIC_BASE_URL }}
+            EOF
+            
+            # Login to GitHub Container Registry
+            echo "🔐 Logging in to GitHub Container Registry..."
             echo "${{ secrets.GITHUB_TOKEN }}" | docker login ${{ env.REGISTRY }} -u ${{ github.actor }} --password-stdin
             
+            # Pull latest image
+            echo "⬇️ Pulling latest Docker image..."
             docker compose pull
             
+            # Stop old containers
+            echo "⏹️ Stopping old containers..."
+            docker compose down --remove-orphans || true
+            
+            # Start new containers
+            echo "▶️ Starting services..."
             docker compose up -d
             
-            docker image prune -af --filter "until=24h"
-            
+            # Show container status
+            echo "📊 Container Status:"
             docker compose ps
             
-            echo "Deployment completed successfully!"
+            # Show recent logs
+            echo "📝 Recent Logs:"
+            docker compose logs --tail=20
+            
+            # Cleanup old images
+            echo "🧹 Cleaning up old images..."
+            docker image prune -af --filter "until=24h"
+            
+            echo "✅ Deployment completed successfully!"
+            echo "🌐 Application should be available at: ${{ secrets.NEXT_PUBLIC_BASE_URL }}"

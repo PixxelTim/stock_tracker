@@ -1,32 +1,31 @@
 version: '3.8'
 
 services:
-  stock-tracker:
-    image: ${DOCKER_IMAGE:-stock-tracker-app:latest}
+  app:
+    image: ${DOCKER_IMAGE}
     container_name: stock-tracker-app
-    
-    build:
-      context: .
-      dockerfile: Dockerfile
-      args:
-        NODE_ENV: production
-    
-    ports:
-      - "127.0.0.1:3000:3000"
-    
     restart: unless-stopped
-    
+    ports:
+      - "3000:3000"
     environment:
-      - NODE_ENV=production
-      - PORT=3000
-      - HOSTNAME=0.0.0.0
-    
-    env_file:
-      - .env
-    
-    security_opt:
-      - no-new-privileges:true
+      NODE_ENV: production
+      MONGODB_URI: ${MONGODB_URI}
+      BETTER_AUTH_SECRET: ${BETTER_AUTH_SECRET}
+      BETTER_AUTH_URL: ${BETTER_AUTH_URL}
+      GEMINI_API_KEY: ${GEMINI_API_KEY}
+      NODEMAILER_EMAIL: ${NODEMAILER_EMAIL}
+      NODEMAILER_PASSWORD: ${NODEMAILER_PASSWORD}
+      NEXT_PUBLIC_FINNHUB_API_KEY: ${NEXT_PUBLIC_FINNHUB_API_KEY}
+      FINNHUB_BASE_URL: ${FINNHUB_BASE_URL}
+      NEXT_PUBLIC_BASE_URL: ${NEXT_PUBLIC_BASE_URL}
+    networks:
+      - stock-tracker-network
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
 
 networks:
-  default:
-    name: stock-tracker-network
+  stock-tracker-network:
+    driver: bridge
