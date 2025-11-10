@@ -1,6 +1,6 @@
 export const NAV_ITEMS = [
     { href: '/', label: 'Dashboard' },
-    { href: '/search', label: 'Search' },
+    { href: '/search', label: 'Suche' },
     // { href: '/watchlist', label: 'Watchlist' },
 ];
 
@@ -27,13 +27,13 @@ export const PREFERRED_INDUSTRIES = [
 ];
 
 export const ALERT_TYPE_OPTIONS = [
-    { value: 'upper', label: 'Upper' },
-    { value: 'lower', label: 'Lower' },
+    { value: 'upper', label: 'Höher' },
+    { value: 'lower', label: 'Tiefer' },
 ];
 
 export const CONDITION_OPTIONS = [
-    { value: 'greater', label: 'Greater than (>)' },
-    { value: 'less', label: 'Less than (<)' },
+    { value: 'greater', label: 'Größer als (>)' },
+    { value: 'less', label: 'Weniger als (<)' },
 ];
 
 // TradingView Charts
@@ -55,7 +55,7 @@ export const MARKET_OVERVIEW_WIDGET_CONFIG = {
     symbolActiveColor: 'rgba(15, 237, 190, 0.05)', // highlight color for active symbol
     tabs: [
         {
-            title: 'Financial',
+            title: 'Finanzen',
             symbols: [
                 { s: 'NYSE:JPM', d: 'JPMorgan Chase' },
                 { s: 'NYSE:WFC', d: 'Wells Fargo Co New' },
@@ -66,7 +66,7 @@ export const MARKET_OVERVIEW_WIDGET_CONFIG = {
             ],
         },
         {
-            title: 'Technology',
+            title: 'Technologie',
             symbols: [
                 { s: 'NASDAQ:AAPL', d: 'Apple' },
                 { s: 'NASDAQ:GOOGL', d: 'Alphabet' },
@@ -77,7 +77,7 @@ export const MARKET_OVERVIEW_WIDGET_CONFIG = {
             ],
         },
         {
-            title: 'Services',
+            title: 'Dienstleistungen',
             symbols: [
                 { s: 'NASDAQ:AMZN', d: 'Amazon' },
                 { s: 'NYSE:BABA', d: 'Alibaba Group Hldg Ltd' },
