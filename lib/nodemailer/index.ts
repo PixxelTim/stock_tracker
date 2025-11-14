@@ -1,5 +1,5 @@
 import nodemailer from 'nodemailer';
-import {WELCOME_EMAIL_TEMPLATE, NEWS_SUMMARY_EMAIL_TEMPLATE} from "@/lib/nodemailer/templates";
+import {WELCOME_EMAIL_TEMPLATE, NEWS_SUMMARY_EMAIL_TEMPLATE, DELETE_ACCOUNT_VERIFICATION_EMAIL_TEMPLATE} from "@/lib/nodemailer/templates";
 
 export const transporter = nodemailer.createTransport({
     service: 'gmail',
@@ -37,6 +37,31 @@ export const sendNewsSummaryEmail = async (
         to: email,
         subject: `📈 Market News Summary Today - ${date}`,
         text: `Today's market news summary from Signalist`,
+        html: htmlTemplate,
+    };
+
+    await transporter.sendMail(mailOptions);
+};
+
+export const sendDeleteAccountVerificationEmail = async ({
+    email,
+    name,
+    url,
+}: {
+    email: string;
+    name: string;
+    url: string;
+    token: string;
+}): Promise<void> => {
+    const htmlTemplate = DELETE_ACCOUNT_VERIFICATION_EMAIL_TEMPLATE
+        .replace(/{{name}}/g, name)
+        .replace(/{{url}}/g, url);
+
+    const mailOptions = {
+        from: `"Signalist" <signalist@jsmastery.pro>`,
+        to: email,
+        subject: `⚠️ Verify Account Deletion - Signalist`,
+        text: `Please verify your account deletion request. This action cannot be undone.`,
         html: htmlTemplate,
     };
 

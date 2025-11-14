@@ -942,6 +942,163 @@ export const VOLUME_ALERT_EMAIL_TEMPLATE = `<!DOCTYPE html>
 </body>
 </html>`;
 
+export const DELETE_ACCOUNT_VERIFICATION_EMAIL_TEMPLATE = `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="x-apple-disable-message-reformatting">
+    <title>Verify Account Deletion</title>
+    <style type="text/css">
+        @media (prefers-color-scheme: dark) {
+            .email-container {
+                background-color: #141414 !important;
+                border: 1px solid #30333A !important;
+            }
+            .dark-bg {
+                background-color: #050505 !important;
+            }
+            .dark-text {
+                color: #ffffff !important;
+            }
+            .dark-text-secondary {
+                color: #9ca3af !important;
+            }
+            .dark-text-muted {
+                color: #6b7280 !important;
+            }
+            .dark-border {
+                border-color: #30333A !important;
+            }
+        }
+        
+        @media only screen and (max-width: 600px) {
+            .email-container {
+                width: 100% !important;
+                margin: 0 !important;
+            }
+            .mobile-padding {
+                padding: 24px !important;
+            }
+            .mobile-header-padding {
+                padding: 24px 24px 12px 24px !important;
+            }
+            .mobile-text {
+                font-size: 14px !important;
+                line-height: 1.5 !important;
+            }
+            .mobile-title {
+                font-size: 24px !important;
+                line-height: 1.3 !important;
+            }
+            .mobile-button {
+                width: 100% !important;
+                text-align: center !important;
+            }
+            .mobile-outer-padding {
+                padding: 20px 10px !important;
+            }
+        }
+        @media only screen and (max-width: 480px) {
+            .mobile-title {
+                font-size: 22px !important;
+            }
+            .mobile-padding {
+                padding: 15px !important;
+            }
+            .mobile-header-padding {
+                padding: 15px 15px 8px 15px !important;
+            }
+        }
+    </style>
+</head>
+<body style="margin: 0; padding: 0; background-color: #050505; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+    <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background-color: #050505;">
+        <tr>
+            <td align="center" class="mobile-outer-padding" style="padding: 40px 20px;">
+                <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" class="email-container" style="max-width: 600px; background-color: #141414; border-radius: 8px; border: 1px solid #30333A;">
+                    
+                    <!-- Header with Logo -->
+                    <tr>
+                        <td align="left" class="mobile-header-padding" style="padding: 40px 40px 20px 40px;">
+                            <img src="https://ik.imagekit.io/a6fkjou7d/logo.png?updatedAt=1756378431634" alt="Signalist Logo" width="150" style="max-width: 100%; height: auto;">
+                        </td>
+                    </tr>
+                    
+                    <!-- Main Content -->
+                    <tr>
+                        <td class="mobile-padding" style="padding: 40px 40px 40px 40px;">
+                            
+                            <!-- Warning Heading -->
+                            <h1 class="mobile-title dark-text" style="margin: 0 0 20px 0; font-size: 24px; font-weight: 600; color: #dc2626; line-height: 1.2;">
+                                ⚠️ Account Deletion Request
+                            </h1>
+                            
+                            <!-- Main Message -->
+                            <p class="mobile-text dark-text-secondary" style="margin: 0 0 20px 0; font-size: 16px; line-height: 1.6; color: #CCDADC;">
+                                Hi {{name}},
+                            </p>
+                            
+                            <p class="mobile-text dark-text-secondary" style="margin: 0 0 30px 0; font-size: 16px; line-height: 1.6; color: #CCDADC;">
+                                We received a request to permanently delete your Signalist account. This action cannot be undone and will result in the permanent loss of:
+                            </p>
+                            
+                            <!-- What will be deleted -->
+                            <ul class="mobile-text dark-text-secondary" style="margin: 0 0 30px 0; padding-left: 20px; font-size: 16px; line-height: 1.6; color: #CCDADC;">
+                                <li style="margin-bottom: 12px;">All your watchlists and tracked stocks</li>
+                                <li style="margin-bottom: 12px;">All your price and volume alerts</li>
+                                <li style="margin-bottom: 12px;">Your account settings and preferences</li>
+                                <li style="margin-bottom: 12px;">All personal data associated with your account</li>
+                            </ul>
+                            
+                            <!-- Warning Box -->
+                            <div style="background-color: #dc2626; border-radius: 8px; padding: 20px; margin-bottom: 30px;">
+                                <p class="mobile-text" style="margin: 0; font-size: 14px; line-height: 1.5; color: #ffffff; font-weight: 600;">
+                                    ⚠️ This action is irreversible. Once deleted, your data cannot be recovered.
+                                </p>
+                            </div>
+                            
+                            <!-- Confirmation Text -->
+                            <p class="mobile-text dark-text-secondary" style="margin: 0 0 30px 0; font-size: 16px; line-height: 1.6; color: #CCDADC;">
+                                If you're sure you want to proceed with deleting your account, click the button below:
+                            </p>
+                            
+                            <!-- CTA Button -->
+                            <table role="presentation" cellspacing="0" cellpadding="0" border="0" style="margin: 0 0 30px 0; width: 100%;">
+                                <tr>
+                                    <td align="center" class="mobile-button">
+                                        <a href="{{url}}" style="display: block; width: 100%; background-color: #dc2626; color: #ffffff; text-decoration: none; padding: 16px 32px; border-radius: 8px; font-size: 16px; font-weight: 500; line-height: 1; text-align: center; box-sizing: border-box;">
+                                            Confirm Account Deletion
+                                        </a>
+                                    </td>
+                                </tr>
+                            </table>
+                            
+                            <!-- Alternative Text -->
+                            <p class="mobile-text dark-text-secondary" style="margin: 0 0 10px 0; font-size: 16px; line-height: 1.6; color: #CCDADC;">
+                                If you didn't request this deletion, please ignore this email and your account will remain active.
+                            </p>
+                            
+                            <p class="mobile-text dark-text-muted" style="margin: 0 0 40px 0; font-size: 14px; line-height: 1.5; color: #6b7280;">
+                                This link will expire in 24 hours for security reasons.
+                            </p>
+                            
+                            <!-- Footer Text -->
+                            <p class="mobile-text dark-text-muted" style="margin: 40px 0 0 0; font-size: 14px; line-height: 1.5; color: #CCDADC !important; text-align: center;">
+                               Signalist HQ, 200 Market Street, San Francisco, CA 94105<br>
+                                © 2025 Signalist
+                            </p>
+                        </td>
+                    </tr>
+                    
+                </table>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>`;
+
 export const INACTIVE_USER_REMINDER_EMAIL_TEMPLATE = `<!DOCTYPE html>
 <html lang="en">
 <head>
