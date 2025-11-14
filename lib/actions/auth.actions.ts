@@ -41,3 +41,18 @@ export const signOut = async () => {
         return { success: false, error: 'Sign out failed' }
     }
 }
+
+export const requestDeleteAccount = async () => {
+    try {
+        await auth.api.sendDeleteAccountVerificationEmail({ 
+            headers: await headers(),
+            body: {
+                callbackURL: `${process.env.BETTER_AUTH_URL}/goodbye`
+            }
+        });
+        return { success: true };
+    } catch (e) {
+        console.log('Delete account request failed', e);
+        return { success: false, error: 'Failed to send verification email' };
+    }
+};
