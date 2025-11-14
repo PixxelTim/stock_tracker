@@ -1,231 +1,236 @@
-export const PERSONALIZED_WELCOME_EMAIL_PROMPT = `Generate highly personalized HTML content that will be inserted into an email template at the {{intro}} placeholder.
+export const PERSONALIZED_WELCOME_EMAIL_PROMPT = `Generiere hochgradig personalisierten HTML-Inhalt, der in eine E-Mail-Vorlage am {{intro}}-Platzhalter eingefügt wird.
 
-User profile data:
+Benutzerprofildaten:
 {{userProfile}}
 
-PERSONALIZATION REQUIREMENTS:
-You MUST create content that is obviously tailored to THIS specific user by:
+PERSONALISIERUNGSANFORDERUNGEN:
+Du MUSST Inhalte erstellen, die offensichtlich auf DIESEN spezifischen Benutzer zugeschnitten sind:
 
-IMPORTANT: Do NOT start the personalized content with "Welcome" since the email header already says "Welcome aboard {{name}}". Use alternative openings like "Thanks for joining", "Great to have you", "You're all set", "Perfect timing", etc.
+WICHTIG: Beginne den personalisierten Inhalt NICHT mit "Willkommen", da die E-Mail-Kopfzeile bereits "Welcome aboard {{name}}" sagt. Verwende alternative Eröffnungen wie "Danke fürs Mitmachen", "Toll, dass du dabei bist", "Alles bereit", "Perfektes Timing", etc.
 
-1. **Direct Reference to User Details**: Extract and use specific information from their profile:
-   - Their exact investment goals or objectives
-   - Their stated risk tolerance level
-   - Their preferred sectors/industries mentioned
-   - Their experience level or background
-   - Any specific stocks/companies they're interested in
-   - Their investment timeline (short-term, long-term, retirement)
+1. **Direkter Bezug zu Benutzerdetails**: Extrahiere und verwende spezifische Informationen aus ihrem Profil:
+   - Ihre genauen Anlageziele oder -vorgaben
+   - Ihr angegebenes Risikobereitschaftsniveau
+   - Ihre bevorzugten Sektoren/Branchen
+   - Ihr Erfahrungsniveau oder Hintergrund
+   - Spezifische Aktien/Unternehmen, an denen sie interessiert sind
+   - Ihr Anlagezeitraum (kurzfristig, langfristig, Altersvorsorge)
 
-2. **Contextual Messaging**: Create content that shows you understand their situation:
-   - New investors → Reference learning/starting their journey
-   - Experienced traders → Reference advanced tools/strategy enhancement  
-   - Retirement planning → Reference building wealth over time
-   - Specific sectors → Reference those exact industries by name
-   - Conservative approach → Reference safety and informed decisions
-   - Aggressive approach → Reference opportunities and growth potential
+2. **Kontextbezogene Botschaft**: Erstelle Inhalte, die zeigen, dass du ihre Situation verstehst:
+   - Neue Anleger → Beziehe dich auf Lernen/Beginn ihrer Reise
+   - Erfahrene Trader → Beziehe dich auf fortgeschrittene Tools/Strategieverbesserung
+   - Altersvorsorgeplanung → Beziehe dich auf Vermögensaufbau über Zeit
+   - Spezifische Sektoren → Nenne diese Branchen explizit beim Namen
+   - Konservativer Ansatz → Beziehe dich auf Sicherheit und informierte Entscheidungen
+   - Aggressiver Ansatz → Beziehe dich auf Chancen und Wachstumspotenzial
 
-3. **Personal Touch**: Make it feel like it was written specifically for them:
-   - Use their goals in your messaging
-   - Reference their interests directly
-   - Connect features to their specific needs
-   - Make them feel understood and seen
+3. **Persönliche Note**: Lasse es so wirken, als wäre es speziell für sie geschrieben:
+   - Verwende ihre Ziele in deiner Botschaft
+   - Beziehe dich direkt auf ihre Interessen
+   - Verbinde Features mit ihren spezifischen Bedürfnissen
+   - Gib ihnen das Gefühl, verstanden und gesehen zu werden
 
-CRITICAL FORMATTING REQUIREMENTS:
-- Return ONLY clean HTML content with NO markdown, NO code blocks, NO backticks
-- Use SINGLE paragraph only: <p class="mobile-text" style="margin: 0 0 30px 0; font-size: 16px; line-height: 1.6; color: #CCDADC;">content</p>
-- Write exactly TWO sentences (add one more sentence than current single sentence)
-- Keep total content between 35-50 words for readability
-- Use <strong> for key personalized elements (their goals, sectors, etc.)
-- DO NOT include "Here's what you can do right now:" as this is already in the template
-- Make every word count toward personalization
-- Second sentence should add helpful context or reinforce the personalization
+KRITISCHE FORMATIERUNGSANFORDERUNGEN:
+- Gib NUR sauberen HTML-Inhalt zurück OHNE Markdown, OHNE Code-Blöcke, OHNE Backticks
+- Verwende NUR EINEN Absatz: <p class="mobile-text" style="margin: 0 0 30px 0; font-size: 16px; line-height: 1.6; color: #CCDADC;">Inhalt</p>
+- Schreibe genau ZWEI Sätze (füge einen weiteren Satz hinzu als der aktuelle einzelne Satz)
+- Halte den gesamten Inhalt zwischen 35-50 Wörtern für Lesbarkeit
+- Verwende <strong> für wichtige personalisierte Elemente (ihre Ziele, Sektoren, etc.)
+- Füge NICHT "Folgendes kannst du jetzt tun:" hinzu, da dies bereits in der Vorlage enthalten ist
+- Jedes Wort sollte zur Personalisierung beitragen
+- Der zweite Satz sollte hilfreichen Kontext hinzufügen oder die Personalisierung verstärken
 
-Example personalized outputs (showing obvious customization with TWO sentences):
-<p class="mobile-text" style="margin: 0 0 30px 0; font-size: 16px; line-height: 1.6; color: #CCDADC;">Thanks for joining Signalist! As someone focused on <strong>technology growth stocks</strong>, you'll love our real-time alerts for companies like the ones you're tracking. We'll help you spot opportunities before they become mainstream news.</p>
+WICHTIG: Der gesamte generierte Inhalt MUSS in deutscher Sprache sein!
 
-<p class="mobile-text" style="margin: 0 0 30px 0; font-size: 16px; line-height: 1.6; color: #CCDADC;">Great to have you aboard! Perfect for your <strong>conservative retirement strategy</strong> — we'll help you monitor dividend stocks without overwhelming you with noise. You can finally track your portfolio progress with confidence and clarity.</p>
+Beispiele für personalisierte Ausgaben (mit offensichtlicher Anpassung und ZWEI Sätzen auf Deutsch):
+<p class="mobile-text" style="margin: 0 0 30px 0; font-size: 16px; line-height: 1.6; color: #CCDADC;">Danke, dass du bei Signalist dabei bist! Als jemand, der sich auf <strong>Technologie-Wachstumsaktien</strong> konzentriert, wirst du unsere Echtzeit-Alarme für Unternehmen lieben, die du verfolgst. Wir helfen dir, Chancen zu erkennen, bevor sie zur Mainstream-Nachricht werden.</p>
 
-<p class="mobile-text" style="margin: 0 0 30px 0; font-size: 16px; line-height: 1.6; color: #CCDADC;">You're all set! Since you're new to investing, we've designed simple tools to help you build confidence while learning the <strong>healthcare sector</strong> you're interested in. Our beginner-friendly alerts will guide you without the confusing jargon.</p>`
+<p class="mobile-text" style="margin: 0 0 30px 0; font-size: 16px; line-height: 1.6; color: #CCDADC;">Toll, dass du dabei bist! Perfekt für deine <strong>konservative Altersvorsorgestrategie</strong> — wir helfen dir, Dividendenaktien zu überwachen, ohne dich mit Informationen zu überwältigen. Du kannst endlich deinen Portfolio-Fortschritt mit Zuversicht und Klarheit verfolgen.</p>
 
-export const NEWS_SUMMARY_EMAIL_PROMPT = `Generate HTML content for a market news summary email that will be inserted into the NEWS_SUMMARY_EMAIL_TEMPLATE at the {{newsContent}} placeholder.
+<p class="mobile-text" style="margin: 0 0 30px 0; font-size: 16px; line-height: 1.6; color: #CCDADC;">Alles bereit! Da du neu im Investieren bist, haben wir einfache Tools entwickelt, die dir helfen, Selbstvertrauen aufzubauen, während du den <strong>Gesundheitssektor</strong> kennenlernst, der dich interessiert. Unsere anfängerfreundlichen Alarme leiten dich ohne verwirrenden Fachjargon.</p>`
 
-News data to summarize:
+export const NEWS_SUMMARY_EMAIL_PROMPT = `Generiere HTML-Inhalt für eine Marktnachrichten-Zusammenfassung-E-Mail, die in das NEWS_SUMMARY_EMAIL_TEMPLATE am {{newsContent}}-Platzhalter eingefügt wird.
+
+Nachrichtendaten zum Zusammenfassen:
 {{newsData}}
 
-CRITICAL FORMATTING REQUIREMENTS:
-- Return ONLY clean HTML content with NO markdown, NO code blocks, NO backticks
-- Structure content with clear sections using proper HTML headings and paragraphs
-- Use these specific CSS classes and styles to match the email template:
+KRITISCHE FORMATIERUNGSANFORDERUNGEN:
+- Gib NUR sauberen HTML-Inhalt zurück OHNE Markdown, OHNE Code-Blöcke, OHNE Backticks
+- Strukturiere den Inhalt mit klaren Abschnitten unter Verwendung geeigneter HTML-Überschriften und -Absätze
+- Verwende diese spezifischen CSS-Klassen und -Stile, um der E-Mail-Vorlage zu entsprechen:
 
-SECTION HEADINGS (for categories like "Market Highlights", "Top Movers", etc.):
-<h3 class="mobile-news-title dark-text" style="margin: 30px 0 15px 0; font-size: 18px; font-weight: 600; color: #f8f9fa; line-height: 1.3;">Section Title</h3>
+ABSCHNITTSÜBERSCHRIFTEN (für Kategorien wie "Marktüberblick", "Top-Gewinner", etc.):
+<h3 class="mobile-news-title dark-text" style="margin: 30px 0 15px 0; font-size: 18px; font-weight: 600; color: #f8f9fa; line-height: 1.3;">Abschnittstitel</h3>
 
-PARAGRAPHS (for news content):
-<p class="mobile-text dark-text-secondary" style="margin: 0 0 20px 0; font-size: 16px; line-height: 1.6; color: #CCDADC;">Content goes here</p>
+ABSÄTZE (für Nachrichteninhalte):
+<p class="mobile-text dark-text-secondary" style="margin: 0 0 20px 0; font-size: 16px; line-height: 1.6; color: #CCDADC;">Inhalt kommt hierher</p>
 
-STOCK/COMPANY MENTIONS:
-<strong style="color: #FDD458;">Stock Symbol</strong> for ticker symbols
-<strong style="color: #CCDADC;">Company Name</strong> for company names
+AKTIEN-/UNTERNEHMENSERWÄHNUNGEN:
+<strong style="color: #FDD458;">Aktiensymbol</strong> für Tickersymbole
+<strong style="color: #CCDADC;">Unternehmensname</strong> für Unternehmensnamen
 
-PERFORMANCE INDICATORS:
-Use 📈 for gains, 📉 for losses, 📊 for neutral/mixed
+LEISTUNGSINDIKATOREN:
+Verwende 📈 für Gewinne, 📉 für Verluste, 📊 für neutral/gemischt
 
-NEWS ARTICLE STRUCTURE:
-For each individual news item within a section, use this structure:
-1. Article container with visual styling and icon
-2. Article title as a subheading
-3. Key takeaways in bullet points (2-3 actionable insights)
-4. "What this means" section for context
-5. "Read more" link to the original article
-6. Visual divider between articles
+NACHRICHTENARTIKELSTRUKTUR:
+Verwende für jeden einzelnen Nachrichteneintrag innerhalb eines Abschnitts diese Struktur:
+1. Artikelcontainer mit visueller Gestaltung und Symbol
+2. Artikeltitel als Zwischenüberschrift
+3. Wichtige Erkenntnisse in Aufzählungspunkten (2-3 umsetzbare Erkenntnisse)
+4. "Was das bedeutet"-Abschnitt für Kontext
+5. "Mehr lesen"-Link zum Originalartikel
+6. Visueller Trenner zwischen Artikeln
 
-ARTICLE CONTAINER:
-Wrap each article in a clean, simple container:
+ARTIKELCONTAINER:
+Umschließe jeden Artikel in einem sauberen, einfachen Container:
 <div class="dark-info-box" style="background-color: #212328; padding: 24px; margin: 20px 0; border-radius: 8px;">
 
-ARTICLE TITLES:
+ARTIKELTITEL:
 <h4 class="dark-text" style="margin: 0 0 16px 0; font-size: 18px; font-weight: 600; color: #FFFFFF; line-height: 1.4;">
-Article Title Here
+Artikeltitel hier
 </h4>
 
-BULLET POINTS (minimum 3 concise insights):
-Use this format with clear, concise explanations (no label needed):
+AUFZÄHLUNGSPUNKTE (mindestens 3 prägnante Erkenntnisse):
+Verwende dieses Format mit klaren, prägnanten Erklärungen (kein Label erforderlich):
 <ul style="margin: 16px 0 20px 0; padding-left: 0; margin-left: 0; list-style: none;">
   <li class="dark-text-secondary" style="margin: 0 0 16px 0; padding: 0; margin-left: 0; font-size: 16px; line-height: 1.6; color: #CCDADC;">
-    <span style="color: #FDD458; font-weight: bold; font-size: 20px; margin-right: 8px;">•</span>Clear, concise explanation in simple terms that's easy to understand quickly.
+    <span style="color: #FDD458; font-weight: bold; font-size: 20px; margin-right: 8px;">•</span>Klare, prägnante Erklärung in einfachen Worten, die schnell zu verstehen ist.
   </li>
   <li class="dark-text-secondary" style="margin: 0 0 16px 0; padding: 0; margin-left: 0; font-size: 16px; line-height: 1.6; color: #CCDADC;">
-    <span style="color: #FDD458; font-weight: bold; font-size: 20px; margin-right: 8px;">•</span>Brief explanation with key numbers and what they mean in everyday language.
+    <span style="color: #FDD458; font-weight: bold; font-size: 20px; margin-right: 8px;">•</span>Kurze Erklärung mit wichtigen Zahlen und was sie in Alltagssprache bedeuten.
   </li>
   <li class="dark-text-secondary" style="margin: 0 0 16px 0; padding: 0; margin-left: 0; font-size: 16px; line-height: 1.6; color: #CCDADC;">
-    <span style="color: #FDD458; font-weight: bold; font-size: 20px; margin-right: 8px;">•</span>Simple takeaway about what this means for regular people's money.
+    <span style="color: #FDD458; font-weight: bold; font-size: 20px; margin-right: 8px;">•</span>Einfache Schlussfolgerung darüber, was dies für das Geld normaler Menschen bedeutet.
   </li>
 </ul>
 
-INSIGHT SECTION:
-Add simple context explanation:
+ERKENNTNISABSCHNITT:
+Füge eine einfache Kontexterklärung hinzu:
 <div style="background-color: #141414; border: 1px solid #374151; padding: 15px; border-radius: 6px; margin: 16px 0;">
-<p class="dark-text-secondary" style="margin: 0; font-size: 14px; color: #CCDADC; line-height: 1.4;">💡 <strong style="color: #FDD458;">Bottom Line:</strong> Simple explanation of why this news matters to your money in everyday language.</p>
+<p class="dark-text-secondary" style="margin: 0; font-size: 14px; color: #CCDADC; line-height: 1.4;">💡 <strong style="color: #FDD458;">Fazit:</strong> Einfache Erklärung, warum diese Nachricht für dein Geld in Alltagssprache wichtig ist.</p>
 </div>
 
-READ MORE BUTTON:
+MEHR LESEN-BUTTON:
 <div style="margin: 20px 0 0 0;">
-<a href="ARTICLE_URL" style="color: #FDD458; text-decoration: none; font-weight: 500; font-size: 14px;" target="_blank" rel="noopener noreferrer">Read Full Story →</a>
+<a href="ARTICLE_URL" style="color: #FDD458; text-decoration: none; font-weight: 500; font-size: 14px;" target="_blank" rel="noopener noreferrer">Ganze Story lesen →</a>
 </div>
 
-ARTICLE DIVIDER:
-Close each article container:
+ARTIKELTRENNER:
+Schließe jeden Artikelcontainer:
 </div>
 
-SECTION DIVIDERS:
-Between major sections, use:
+ABSCHNITTSTRENNER:
+Zwischen Hauptabschnitten verwende:
 <div style="border-top: 1px solid #374151; margin: 32px 0 24px 0;"></div>
 
-Content guidelines:
-- Organize news into logical sections with icons (📊 Market Overview, 📈 Top Gainers, 📉 Top Losers, 🔥 Breaking News, 💼 Earnings Reports, 🏛️ Economic Data, etc.)
-- NEVER repeat section headings - use each section type only once per email
-- For each news article, include its actual headline/title from the news data
-- Provide MINIMUM 3 CONCISE bullet points (NO "Key Takeaways" label - start directly with bullets)
-- Each bullet should be SHORT and EASY TO UNDERSTAND - one clear sentence preferred
-- Use PLAIN ENGLISH - avoid jargon, complex financial terms, or insider language
-- Explain concepts as if talking to someone new to investing
-- Include specific numbers but explain what they mean in simple terms
-- Add "Bottom Line" context in everyday language anyone can understand
-- Use clean, light design with yellow bullets for better readability
-- Make each article easy to scan with clear spacing and structure
-- Always include simple "Read Full Story" buttons with actual URLs
-- Focus on PRACTICAL insights regular people can understand and use
-- Explain what the news means for regular investors' money
-- Keep language conversational and accessible to everyone
-- Prioritize BREVITY and CLARITY over detailed explanations
+Inhaltsrichtlinien:
+- Organisiere Nachrichten in logische Abschnitte mit Symbolen (📊 Marktüberblick, 📈 Top-Gewinner, 📉 Top-Verlierer, 🔥 Eilmeldungen, 💼 Gewinnberichte, 🏛️ Wirtschaftsdaten, etc.)
+- Wiederhole NIEMALS Abschnittsüberschriften - verwende jeden Abschnittstyp nur einmal pro E-Mail
+- Füge für jeden Nachrichtenartikel seine tatsächliche Schlagzeile/Titel aus den Nachrichtendaten ein
+- Liefere MINDESTENS 3 PRÄGNANTE Aufzählungspunkte (KEIN "Wichtige Erkenntnisse"-Label - beginne direkt mit Aufzählungspunkten)
+- Jeder Aufzählungspunkt sollte KURZ und LEICHT ZU VERSTEHEN sein - ein klarer Satz bevorzugt
+- Verwende EINFACHE SPRACHE - vermeide Fachjargon, komplexe Finanzbegriffe oder Insider-Sprache
+- Erkläre Konzepte, als würdest du mit jemandem sprechen, der neu im Investieren ist
+- Füge spezifische Zahlen ein, aber erkläre, was sie in einfachen Worten bedeuten
+- Füge "Fazit"-Kontext in Alltagssprache hinzu, die jeder verstehen kann
+- Verwende ein sauberes, helles Design mit gelben Aufzählungspunkten für bessere Lesbarkeit
+- Mache jeden Artikel einfach zu scannen mit klarem Abstand und Struktur
+- Füge immer einfache "Ganze Story lesen"-Buttons mit tatsächlichen URLs ein
+- Konzentriere dich auf PRAKTISCHE Erkenntnisse, die normale Menschen verstehen und nutzen können
+- Erkläre, was die Nachrichten für das Geld regulärer Anleger bedeuten
+- Halte die Sprache konversationell und für jeden zugänglich
+- Priorisiere KÜRZE und KLARHEIT über detaillierte Erklärungen
 
-Example structure:
-<h3 class="mobile-news-title dark-text" style="margin: 30px 0 15px 0; font-size: 20px; font-weight: 600; color: #f8f9fa; line-height: 1.3;">📊 Market Overview</h3>
+WICHTIG: Der gesamte generierte Inhalt (Überschriften, Artikel, Aufzählungspunkte, Erklärungen) MUSS in deutscher Sprache sein!
+
+Beispielstruktur (auf Deutsch):
+<h3 class="mobile-news-title dark-text" style="margin: 30px 0 15px 0; font-size: 20px; font-weight: 600; color: #f8f9fa; line-height: 1.3;">📊 Marktüberblick</h3>
 
 <div class="dark-info-box" style="background-color: #212328; padding: 24px; margin: 20px 0; border-radius: 8px;">
 <h4 class="dark-text" style="margin: 0 0 16px 0; font-size: 18px; font-weight: 600; color: #FDD458; line-height: 1.4;">
-Stock Market Had Mixed Results Today
+Aktienmarkt hatte heute gemischte Ergebnisse
 </h4>
 
 <ul style="margin: 16px 0 20px 0; padding-left: 0; margin-left: 0; list-style: none;">
   <li class="dark-text-secondary" style="margin: 0 0 16px 0; padding: 0; margin-left: 0; font-size: 16px; line-height: 1.6; color: #CCDADC;">
-    <span style="color: #FDD458; font-weight: bold; font-size: 20px; margin-right: 8px;">•</span>Tech stocks like Apple went up 1.2% today, which is good news for tech investors.
+    <span style="color: #FDD458; font-weight: bold; font-size: 20px; margin-right: 8px;">•</span>Tech-Aktien wie Apple stiegen heute um 1,2%, was gute Nachrichten für Tech-Investoren sind.
   </li>
   <li class="dark-text-secondary" style="margin: 0 0 16px 0; padding: 0; margin-left: 0; font-size: 16px; line-height: 1.6; color: #CCDADC;">
-    <span style="color: #FDD458; font-weight: bold; font-size: 20px; margin-right: 8px;">•</span>Traditional companies went down 0.3%, showing investors prefer tech right now.
+    <span style="color: #FDD458; font-weight: bold; font-size: 20px; margin-right: 8px;">•</span>Traditionelle Unternehmen fielen um 0,3%, was zeigt, dass Anleger derzeit Tech bevorzugen.
   </li>
   <li class="dark-text-secondary" style="margin: 0 0 16px 0; padding: 0; margin-left: 0; font-size: 16px; line-height: 1.6; color: #CCDADC;">
-    <span style="color: #FDD458; font-weight: bold; font-size: 20px; margin-right: 8px;">•</span>High trading volume (12.4 billion shares) shows investors are confident and active.
+    <span style="color: #FDD458; font-weight: bold; font-size: 20px; margin-right: 8px;">•</span>Hohes Handelsvolumen (12,4 Milliarden Aktien) zeigt, dass Anleger selbstbewusst und aktiv sind.
   </li>
 </ul>
 
 <div style="background-color: #141414; border: 1px solid #374151; padding: 15px; border-radius: 6px; margin: 16px 0;">
-<p class="dark-text-secondary" style="margin: 0; font-size: 14px; color: #CCDADC; line-height: 1.4;">💡 <strong style="color: #FDD458;">Bottom Line:</strong> If you own tech stocks, today was good for you. If you're thinking about investing, tech companies might be a smart choice right now.</p>
+<p class="dark-text-secondary" style="margin: 0; font-size: 14px; color: #CCDADC; line-height: 1.4;">💡 <strong style="color: #FDD458;">Fazit:</strong> Wenn du Tech-Aktien besitzt, war heute ein guter Tag für dich. Wenn du über eine Investition nachdenkst, könnten Tech-Unternehmen jetzt eine kluge Wahl sein.</p>
 </div>
 
 <div style="margin: 20px 0 0 0;">
-<a href="https://example.com/article1" style="color: #FDD458; text-decoration: none; font-weight: 500; font-size: 14px;" target="_blank" rel="noopener noreferrer">Read Full Story →</a>
+<a href="https://example.com/article1" style="color: #FDD458; text-decoration: none; font-weight: 500; font-size: 14px;" target="_blank" rel="noopener noreferrer">Ganze Story lesen →</a>
 </div>
 </div>
 
 <div style="border-top: 1px solid #374151; margin: 32px 0 24px 0;"></div>
 
-<h3 class="mobile-news-title dark-text" style="margin: 30px 0 15px 0; font-size: 20px; font-weight: 600; color: #f8f9fa; line-height: 1.3;">📈 Top Gainers</h3>
+<h3 class="mobile-news-title dark-text" style="margin: 30px 0 15px 0; font-size: 20px; font-weight: 600; color: #f8f9fa; line-height: 1.3;">📈 Top-Gewinner</h3>
 
 <div class="dark-info-box" style="background-color: #212328; padding: 24px; margin: 20px 0; border-radius: 8px;">
 <h4 class="dark-text" style="margin: 0 0 16px 0; font-size: 18px; font-weight: 600; color: #FDD458; line-height: 1.4;">
-Apple Stock Jumped After Great Earnings Report
+Apple-Aktie sprang nach großartigem Gewinnbericht
 </h4>
 
 <ul style="margin: 16px 0 20px 0; padding-left: 0; margin-left: 0; list-style: none;">
   <li class="dark-text-secondary" style="margin: 0 0 16px 0; padding: 0; margin-left: 0; font-size: 16px; line-height: 1.6; color: #CCDADC;">
-    <span style="color: #FDD458; font-weight: bold; font-size: 20px; margin-right: 8px;">•</span>Apple stock jumped 5.2% after beating earnings expectations.
+    <span style="color: #FDD458; font-weight: bold; font-size: 20px; margin-right: 8px;">•</span>Apple-Aktie sprang um 5,2% nach Übertreffen der Gewinnerwartungen.
   </li>
   <li class="dark-text-secondary" style="margin: 0 0 16px 0; padding: 0; margin-left: 0; font-size: 16px; line-height: 1.6; color: #CCDADC;">
-    <span style="color: #FDD458; font-weight: bold; font-size: 20px; margin-right: 8px;">•</span>iPhone sales expected to grow 8% next quarter despite economic uncertainty.
+    <span style="color: #FDD458; font-weight: bold; font-size: 20px; margin-right: 8px;">•</span>iPhone-Verkäufe werden voraussichtlich im nächsten Quartal um 8% wachsen trotz wirtschaftlicher Unsicherheit.
   </li>
   <li class="dark-text-secondary" style="margin: 0 0 16px 0; padding: 0; margin-left: 0; font-size: 16px; line-height: 1.6; color: #CCDADC;">
-    <span style="color: #FDD458; font-weight: bold; font-size: 20px; margin-right: 8px;">•</span>App store and services revenue hit $22.3 billion (up 14%), providing steady income.
+    <span style="color: #FDD458; font-weight: bold; font-size: 20px; margin-right: 8px;">•</span>App Store- und Service-Einnahmen erreichten 22,3 Milliarden Dollar (plus 14%), was stabile Einnahmen bietet.
   </li>
 </ul>
 
 <div style="background-color: #141414; border: 1px solid #374151; padding: 15px; border-radius: 6px; margin: 16px 0;">
-<p class="dark-text-secondary" style="margin: 0; font-size: 14px; color: #CCDADC; line-height: 1.4;">💡 <strong style="color: #FDD458;">Bottom Line:</strong> Apple is making money in different ways (phones AND services), so it's a pretty safe stock to own even when the economy gets shaky.</p>
+<p class="dark-text-secondary" style="margin: 0; font-size: 14px; color: #CCDADC; line-height: 1.4;">💡 <strong style="color: #FDD458;">Fazit:</strong> Apple verdient Geld auf verschiedene Weisen (Telefone UND Services), daher ist es eine ziemlich sichere Aktie, auch wenn die Wirtschaft wackelig wird.</p>
 </div>
 
 <div style="margin: 20px 0 0 0;">
-<a href="https://example.com/article2" style="color: #FDD458; text-decoration: none; font-weight: 500; font-size: 14px;" target="_blank" rel="noopener noreferrer">Read Full Story →</a>
+<a href="https://example.com/article2" style="color: #FDD458; text-decoration: none; font-weight: 500; font-size: 14px;" target="_blank" rel="noopener noreferrer">Ganze Story lesen →</a>
 </div>
 </div>`
 
-export const TRADINGVIEW_SYMBOL_MAPPING_PROMPT = `You are an expert in financial markets and trading platforms. Your task is to find the correct TradingView symbol that corresponds to a given Finnhub stock symbol.
+export const TRADINGVIEW_SYMBOL_MAPPING_PROMPT = `Du bist ein Experte für Finanzmärkte und Handelsplattformen. Deine Aufgabe ist es, das korrekte TradingView-Symbol zu finden, das einem gegebenen Finnhub-Aktiensymbol entspricht.
 
-Stock information from Finnhub:
+Aktieninformationen von Finnhub:
 Symbol: {{symbol}}
 Company: {{company}}
 Exchange: {{exchange}}
 Currency: {{currency}}
 Country: {{country}}
 
-IMPORTANT RULES:
-1. TradingView uses specific symbol formats that may differ from Finnhub
-2. For US stocks: Usually just the symbol (e.g., AAPL for Apple)
-3. For international stocks: Often includes exchange prefix (e.g., NASDAQ:AAPL, NYSE:MSFT, LSE:BARC)
-4. Some symbols may have suffixes for different share classes
-5. ADRs and foreign stocks may have different symbol formats
+WICHTIGE REGELN:
+1. TradingView verwendet spezifische Symbolformate, die sich von Finnhub unterscheiden können
+2. Für US-Aktien: Normalerweise nur das Symbol (z.B. AAPL für Apple)
+3. Für internationale Aktien: Oft mit Börsen-Präfix (z.B. NASDAQ:AAPL, NYSE:MSFT, LSE:BARC)
+4. Einige Symbole können Suffixe für verschiedene Aktienklassen haben
+5. ADRs und ausländische Aktien können unterschiedliche Symbolformate haben
 
-RESPONSE FORMAT:
-Return ONLY a valid JSON object with this exact structure:
+ANTWORTFORMAT:
+Gib NUR ein gültiges JSON-Objekt mit genau dieser Struktur zurück:
 {
   "tradingViewSymbol": "EXCHANGE:SYMBOL",
   "confidence": "high|medium|low",
-  "reasoning": "Brief explanation of why this mapping is correct"
+  "reasoning": "Kurze Erklärung, warum dieses Mapping korrekt ist"
 }
 
-EXAMPLES:
-- Apple Inc. (AAPL) from Finnhub → {"tradingViewSymbol": "NASDAQ:AAPL", "confidence": "high", "reasoning": "Apple trades on NASDAQ as AAPL"}
-- Microsoft Corp (MSFT) from Finnhub → {"tradingViewSymbol": "NASDAQ:MSFT", "confidence": "high", "reasoning": "Microsoft trades on NASDAQ as MSFT"}
-- Barclays PLC (BARC.L) from Finnhub → {"tradingViewSymbol": "LSE:BARC", "confidence": "high", "reasoning": "Barclays trades on London Stock Exchange as BARC"}
+BEISPIELE:
+- Apple Inc. (AAPL) von Finnhub → {"tradingViewSymbol": "NASDAQ:AAPL", "confidence": "high", "reasoning": "Apple wird an der NASDAQ als AAPL gehandelt"}
+- Microsoft Corp (MSFT) von Finnhub → {"tradingViewSymbol": "NASDAQ:MSFT", "confidence": "high", "reasoning": "Microsoft wird an der NASDAQ als MSFT gehandelt"}
+- Barclays PLC (BARC.L) von Finnhub → {"tradingViewSymbol": "LSE:BARC", "confidence": "high", "reasoning": "Barclays wird an der London Stock Exchange als BARC gehandelt"}
 
-Your response must be valid JSON only. Do not include any other text.`
+Deine Antwort muss nur gültiges JSON sein. Füge keinen anderen Text hinzu.`
+
 
